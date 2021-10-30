@@ -1,0 +1,13 @@
+# npm
+package-lock.json
+node_modules
+dist
+
+# yarn
+yarn.lock
+
+# vscode
+.vscode
+
+# mac
+.DS_Store

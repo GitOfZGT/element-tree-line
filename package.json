@@ -1,0 +1,102 @@
+{
+    "name": "element-tree-line",
+    "version": "0.1.0",
+    "author": "zougt <zgtusers@outlook.com>",
+    "description": "给element-ui和element-plus的el-tree组件添加结构线的子组件",
+    "homepage": "https://github.com/GitOfZGT/element-tree-line",
+    "bugs": "https://github.com/GitOfZGT/element-tree-line/issues",
+    "main": "dist/index.js",
+    "module": "dist/index.es.js",
+    "typings": "dist/index.d.ts",
+    "keywords": [
+        "element-ui",
+        "element-plus",
+        "el-tree",
+        "tree-line",
+        "component",
+        "vue2",
+        "vue3"
+    ],
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "postinstall": "husky install",
+        "prepublishOnly": "pinst --disable",
+        "postpublish": "pinst --enable",
+        "prepublish": "npm run build",
+        "dev": "rollup -c rollup.config.js -w",
+        "build": "rollup -c rollup.config.js"
+    },
+    "dependencies": {},
+    "peerDependencies": {
+        "vue": "^2.6.11 || ^3.2.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.15.8",
+        "@babel/preset-env": "^7.15.8",
+        "@commitlint/cli": "^13.1.0",
+        "@commitlint/config-conventional": "^13.1.0",
+        "@rollup/plugin-babel": "^5.3.0",
+        "@rollup/plugin-commonjs": "^19.0.1",
+        "@rollup/plugin-node-resolve": "^13.0.2",
+        "@types/babel__core": "^7.1.16",
+        "@vue/eslint-config-prettier": "^6.0.0",
+        "babel-eslint": "^10.1.0",
+        "babel-plugin-import": "^1.13.3",
+        "eslint": "^6.7.2",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-vue": "^6.2.2",
+        "fs-extra": "^10.0.0",
+        "glob": "^7.2.0",
+        "husky": "^7.0.1",
+        "lint-staged": "^11.1.1",
+        "pinst": "^2.1.6",
+        "prettier": "^2.3.2",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.53.3",
+        "rollup-plugin-scss": "^3.0.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "sass": "~1.32.12",
+        "vue": "^2.6.11",
+        "yamljs": "^0.3.0"
+    },
+    "license": "MIT",
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended",
+            "@vue/prettier"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {
+            "max-lines": [
+                "warn",
+                {
+                    "max": 400
+                }
+            ],
+            "max-params": [
+                "error",
+                {
+                    "max": 3
+                }
+            ]
+        }
+    },
+    "lint-staged": {
+        "*.{js,vue,jsx}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
+    }
+}
