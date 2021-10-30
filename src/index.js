@@ -10,6 +10,9 @@ export function getElementLabelLine(h) {
             data: {
                 type: Object,
             },
+            treeData: {
+                type: Array,
+            },
             indent: {
                 type: Number,
                 default() {
@@ -59,13 +62,40 @@ export function getElementLabelLine(h) {
             const lastnodeArr = [];
             let currentNode = this.node;
             while (currentNode) {
-                const parentNode = currentNode.parent;
+                let parentNode = currentNode.parent;
+                // 兼容element-plus的 el-tree-v2 (Virtualized Tree 虚拟树)
+                if (currentNode.level === 1 && !currentNode.parent) {
+                    // el-tree-v2的第一层node是没有parent的，必需 treeData 创建一个parent
+                    if (!this.treeData || !Array.isArray(this.treeData)) {
+                        throw Error(
+                            'if you using el-tree-v2 (Virtualized Tree) of element-plus,element-tree-line required data.'
+                        );
+                    }
+                    parentNode = {
+                        children: Array.isArray(this.treeData)
+                            ? this.treeData.map((item) => {
+                                  return { ...item, key: item.id };
+                              })
+                            : [],
+                        level: 0,
+                        key: 'node-0',
+                        parent: null,
+                    };
+                }
                 if (parentNode) {
-                    const index = parentNode.childNodes.findIndex(
-                        (item) => item.id === currentNode.id
+                    // element-plus的 el-tree-v2 使用的是children和key， 其他使用的是 childNodes和id
+                    const index = (
+                        parentNode.children || parentNode.childNodes
+                    ).findIndex(
+                        (item) =>
+                            (item.key || item.id) ===
+                            (currentNode.key || currentNode.id)
                     );
                     lastnodeArr.unshift(
-                        index === parentNode.childNodes.length - 1
+                        index ===
+                            (parentNode.children || parentNode.childNodes)
+                                .length -
+                                1
                     );
                 }
                 currentNode = parentNode;

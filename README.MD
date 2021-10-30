@@ -1,7 +1,6 @@
 # element-tree-line
 
-这是一个给 [element-ui](https://element.eleme.io/#/zh-CN/component/tree)和[element-plus](https://element-plus.gitee.io/zh-CN/component/tree.html)的 `el-tree` 添加结构线的子组件，不会对 `el-tree` 原有的功能造成任何的影响，有了线的展示，从美观和树形结构清晰上都有很好的体现。（我总是在做不是很重要的东西，哈哈）
-
+这是一个给 [element-ui](https://element.eleme.io/#/zh-CN/component/tree)和[element-plus](https://element-plus.gitee.io/zh-CN/component/tree.html)的 `el-tree` 添加结构线的子组件，不会对 `el-tree` 原有的功能造成任何的影响，同时能够支持[element-plus 的 Virtualized Tree 虚拟树](https://element-plus.org/zh-CN/component/tree-v2.html)，有了线的展示，从美观和树形结构清晰上都有很好的体现。（我总是在做不是很重要的东西，哈哈）
 
 ## 安装与使用
 
@@ -335,13 +334,93 @@ export default {
 </style>
 ```
 
+### Used in element-plus Virtualized Tree 虚拟树
+
+**案例效果**
+
+![element-plus-tree-v2](./images/element-plus-tree-v2.gif)
+
+```html
+<template>
+    <el-tree-v2
+        :data="treeData"
+        :props="props"
+        :indent="treeIndent"
+        :height="400"
+    >
+        <template v-slot:default="{ node }">
+            <element-tree-line
+                :node="node"
+                :treeData="treeData"
+                :showLabelLine="true"
+                :indent="treeIndent"
+            >
+            </element-tree-line>
+        </template>
+    </el-tree-v2>
+</template>
+<script lang="ts">
+    import { defineComponent, ref } from 'vue';
+    import { getElementLabelLine } from 'element-tree-line';
+    import 'element-tree-line/dist/style.css';
+    import { h } from 'vue';
+    const getKey = (prefix, id) => {
+        return `${prefix}-${id}`;
+    };
+
+    const createData = (
+        maxDeep,
+        maxChildren,
+        minNodesNumber,
+        deep = 1,
+        key = 'node'
+    ) => {
+        let id = 0;
+        return new Array(minNodesNumber).fill(deep).map(() => {
+            const childrenNumber =
+                deep === maxDeep ? 0 : Math.round(Math.random() * maxChildren);
+            const nodeKey = getKey(key, ++id);
+            return {
+                id: nodeKey,
+                label: nodeKey,
+                children: childrenNumber
+                    ? createData(
+                          maxDeep,
+                          maxChildren,
+                          childrenNumber,
+                          deep + 1,
+                          nodeKey
+                      )
+                    : undefined,
+            };
+        });
+    };
+    export default defineComponent({
+        components: { ElementTreeLine: getElementLabelLine(h) },
+        setup() {
+            return {
+                treeData: createData(4, 30, 40),
+                treeIndent: 40,
+                props: ref({
+                    id: 'id',
+                    label: 'label',
+                    children: 'children',
+                }),
+            };
+        },
+    });
+</script>
+```
+
 ### ElementLabelLine Props
 
-| 参数          | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | :----: | ------ |
-| node          | 由[el-tree 的 default slot](https://element-plus.gitee.io/zh-CN/component/tree.html#slots) 提供的作用域参数 node，**必填**。               | object  |   -    | -      |
-| showLabelLine | 是否显示 label 的横线                                                                                                                | boolean |   -    | false  |
-| indent        | 相邻级节点间的水平缩进，单位为像素 ; 对应[el-tree 的 indent](https://element-plus.gitee.io/zh-CN/component/tree.html#attributes)。 | number  |   -    | 16     |
+| 参数          | 说明                                                                                                                                                                      | 类型    | 可选值 | 默认值 |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :----: | ------ |
+| node          | 由[el-tree 的 default slot](https://element-plus.gitee.io/zh-CN/component/tree.html#slots) 提供的作用域参数 node，**必填**。                                              | object  |   -    | -      |
+| showLabelLine | 是否显示 label 的横线                                                                                                                                                     | boolean |   -    | false  |
+| treeData      | 对应[element-plus 的 el-tree-v2](https://element-plus.org/zh-CN/component/tree-v2.html#attributes) 的 data，**当用在 element-plus 的 el-tree-v2 时，treeData 是必填的**。 | array   |   -    | -      |
+| showLabelLine | 是否显示 label 的横线                                                                                                                                                     | boolean |   -    | false  |
+| indent        | 相邻级节点间的水平缩进，单位为像素 ; 对应[el-tree 的 indent](https://element-plus.gitee.io/zh-CN/component/tree.html#attributes)。                                        | number  |   -    | 16     |
 
 ### ElementLabelLine Slots
 
@@ -350,10 +429,21 @@ export default {
 | node-label       | 自定义 label 区域      |
 | after-node-label | 追加在 label line 之后 |
 
+### 修改线的样式
+
+如果使用的是scss，可以覆盖scss变量修改线的颜色
+
+```scss
+$--element-tree-line-color: #dcdfe6;
+$--element-tree-line-style: dashed;
+$--element-tree-line-width: 1px;
+@import 'element-tree-line/dist/style.scss';
+```
+
 ## 对比其他方式
 
 在做 ElementLabelLine 之前，看 element-ui issues 有不少人提到 el-tree 结构线的需求，官方依然没有支持，有搜索到一些直接覆盖 el-tree 的 css 做法，在节点缩进、点击行效果、拖拽等方面没有很贴合的效果，并不是我想要的
 
 ![css-cover-example](./images/css-cover-example.png)
 
-ElementLabelLine作为el-tree子组件的方式，无侵入性，可插拔，很优雅的添加结构线。
+ElementLabelLine 作为 el-tree 子组件的方式，无侵入性，可插拔，很优雅的添加结构线。
