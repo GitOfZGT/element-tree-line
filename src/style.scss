@@ -1,4 +1,11 @@
-$--line-color: #dcdfe6 !default;
+$--element-tree-line-color: #dcdfe6 !default;
+$--element-tree-line-style: dashed !default;
+$--element-tree-line-width: 1px !default;
+// 添加 el-tree-node__conten 默认没有的 position
+.el-tree .el-tree-node__content {
+    position: relative;
+}
+
 .element-tree-node-label-wrapper {
     flex: 1;
     display: flex;
@@ -13,9 +20,9 @@ $--line-color: #dcdfe6 !default;
     top: 0;
     left: 0;
     height: 100%;
-    border-left: 1px dashed $--line-color;
+    border-left: $--element-tree-line-width $--element-tree-line-style $--element-tree-line-color;
     &.last-node-line {
-        border-left: 1px dashed transparent;
+        border-left: $--element-tree-line-width $--element-tree-line-style transparent;
     }
     &.last-node-isLeaf-line {
         height: 50%;
@@ -27,11 +34,11 @@ $--line-color: #dcdfe6 !default;
     top: 50%;
     left: 0;
     height: 0;
-    border-bottom: 1px dashed $--line-color;
+    border-bottom: $--element-tree-line-width $--element-tree-line-style $--element-tree-line-color;
 }
 .element-tree-node-label-line {
     flex: 1;
-    border-top: 1px dashed $--line-color;
+    border-top: $--element-tree-line-width $--element-tree-line-style $--element-tree-line-color;
     align-self: center;
     margin: 0 10px;
 }
