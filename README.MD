@@ -14,7 +14,7 @@ yarn add element-tree-line -S
 
 ```
 
-### used in vue2 + element-ui
+### Used in vue2 + element-ui
 
 ```js
 // 全局注册组件
@@ -190,7 +190,7 @@ export default {
 </style>
 ```
 
-### used in vue3 + element-plus
+### Used in vue3 + element-plus
 
 ```js
 // 全局注册组件
@@ -339,8 +339,8 @@ export default {
 
 | 参数          | 说明                                                                                                                               | 类型    | 可选值 | 默认值 |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- | :----: | ------ |
-| node          | 由[el-tree 的 default slot](https://element-plus.gitee.io/zh-CN/component/tree.html#slots) 作用域参数 node，必需的。               | object  |   -    | -      |
-| showLabelLine | 是否 label 的横线线                                                                                                                | boolean |   -    | false  |
+| node          | 由[el-tree 的 default slot](https://element-plus.gitee.io/zh-CN/component/tree.html#slots) 提供的作用域参数 node，**必填**。               | object  |   -    | -      |
+| showLabelLine | 是否显示 label 的横线                                                                                                                | boolean |   -    | false  |
 | indent        | 相邻级节点间的水平缩进，单位为像素 ; 对应[el-tree 的 indent](https://element-plus.gitee.io/zh-CN/component/tree.html#attributes)。 | number  |   -    | 16     |
 
 ### ElementLabelLine Slots
