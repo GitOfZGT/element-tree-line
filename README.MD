@@ -354,6 +354,6 @@ export default {
 
 在做 ElementLabelLine 之前，看 element-ui issues 有不少人提到 el-tree 结构线的需求，官方依然没有支持，有搜索到一些直接覆盖 el-tree 的 css 做法，在节点缩进、点击行效果、拖拽等方面没有很贴合的效果，并不是我想要的
 
-![element-plus-tree](./images/css-cover-example.png)
+![css-cover-example](./images/css-cover-example.png)
 
 ElementLabelLine作为el-tree子组件的方式，无侵入性，可插拔，很优雅的添加结构线。
