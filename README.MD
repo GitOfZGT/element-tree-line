@@ -45,7 +45,7 @@ export default {
 
 **案例效果**
 
-![element-ui-tree](./images/element-ui-tree.gif)
+![element-ui-tree](https://img-blog.csdnimg.cn/9ed720cb7146457581bd2565cdf2fc25.gif)
 
 ```html
 <template>
@@ -225,7 +225,7 @@ export default {
 
 **案例效果**
 
-![element-plus-tree](./images/element-plus-tree.gif)
+![element-plus-tree](https://img-blog.csdnimg.cn/ba78e064d88046b39b15d1f6bff68279.gif)
 
 ```html
 <template>
@@ -338,7 +338,7 @@ export default {
 
 **案例效果**
 
-![element-plus-tree-v2](./images/element-plus-tree-v2.gif)
+![element-plus-tree-v2](https://img-blog.csdnimg.cn/25c53e1f77dd4ed39a7e40f7b73e0edf.gif)
 
 ```html
 <template>
