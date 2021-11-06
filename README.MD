@@ -1,5 +1,7 @@
 # element-tree-line
 
+![example](https://img-blog.csdnimg.cn/1c4fe0d00871471b9ac628d2ad11961f.png)
+
 这是一个给 [element-ui](https://element.eleme.io/#/zh-CN/component/tree)和[element-plus](https://element-plus.gitee.io/zh-CN/component/tree.html)的 `el-tree` 添加结构线的子组件，不会对 `el-tree` 原有的功能造成任何的影响，同时能够支持[element-plus 的 Virtualized Tree 虚拟树](https://element-plus.org/zh-CN/component/tree-v2.html)，有了线的展示，从美观和树形结构清晰上都有很好的体现。（我总是在做不是很重要的东西，哈哈）
 
 ## 安装与使用
