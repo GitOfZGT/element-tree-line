@@ -27,6 +27,10 @@ $--element-tree-line-width: 1px !default;
     &.last-node-isLeaf-line {
         height: 50%;
     }
+    &.first-root-node-line {
+        height: 50%;
+        top: 50%;
+    }
 }
 .element-tree-node-line-hor {
     display: block;

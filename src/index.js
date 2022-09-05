@@ -110,6 +110,10 @@ export function getElementLabelLine(h) {
                                 lastnodeArr[i] && this.node.level - 1 !== i,
                             'last-node-isLeaf-line':
                                 lastnodeArr[i] && this.node.level - 1 === i,
+                            'first-root-node-line':
+                                i === 0 &&
+                                this.node.level === 1 &&
+                                !this.node.previousSibling,
                         },
                         style: { left: this.indent * i + 'px' },
                     })
