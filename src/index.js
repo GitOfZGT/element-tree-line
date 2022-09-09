@@ -1,5 +1,6 @@
 import './style.scss';
-export function getElementLabelLine(h) {
+
+function getComConfig(h) {
     return {
         name: 'element-tree-line',
         props: {
@@ -102,12 +103,13 @@ export function getElementLabelLine(h) {
             }
             const lineNodes = [];
             for (let i = 0; i < this.node.level; i++) {
+                if (lastnodeArr[i] && this.node.level - 1 !== i) {
+                    continue;
+                }
                 lineNodes.push(
                     $createElement('span', {
                         class: {
                             'element-tree-node-line-ver': true,
-                            'last-node-line':
-                                lastnodeArr[i] && this.node.level - 1 !== i,
                             'last-node-isLeaf-line':
                                 lastnodeArr[i] && this.node.level - 1 === i,
                         },
@@ -160,6 +162,29 @@ export function getElementLabelLine(h) {
             },
         },
     };
+}
+
+export function getElementLabelLine(h) {
+    const conf = getComConfig(h);
+    if (h) {
+        conf.methods.getScopedSlot = function getScopedSlot(slotName) {
+            if (!slotName) {
+                return null;
+            }
+            const slotNameSplits = slotName.split('||');
+            let scopeSlot = null;
+            for (let index = 0; index < slotNameSplits.length; index++) {
+                const name = slotNameSplits[index];
+                const slot = (this.$slots || {})[name];
+                if (slot) {
+                    scopeSlot = slot;
+                    break;
+                }
+            }
+            return scopeSlot;
+        };
+    }
+    return conf;
 }
 const ElementLabelLine = getElementLabelLine();
 export default ElementLabelLine;

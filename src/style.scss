@@ -21,9 +21,6 @@ $--element-tree-line-width: 1px !default;
     left: 0;
     height: 100%;
     border-left: $--element-tree-line-width $--element-tree-line-style $--element-tree-line-color;
-    &.last-node-line {
-        border-left: $--element-tree-line-width $--element-tree-line-style transparent;
-    }
     &.last-node-isLeaf-line {
         height: 50%;
     }

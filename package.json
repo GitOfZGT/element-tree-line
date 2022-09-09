@@ -1,6 +1,6 @@
 {
     "name": "element-tree-line",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "author": "zougt <zgtusers@outlook.com>",
     "description": "给element-ui和element-plus的el-tree组件添加结构线的子组件",
     "homepage": "https://github.com/GitOfZGT/element-tree-line",
